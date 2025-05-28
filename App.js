@@ -14,6 +14,23 @@ export default function App() {
   // CALCULO DO IMC;
   const calcIMC = () => {
     let resultado = peso / (altura * altura);
+    console.log(resultado)
+
+    if (resultado < 18.5) {
+      console.log("Está abaixo do peso")
+    }
+    else if (resultado <= 24.9) {
+      console.log("Tem peso normal")
+    }
+    else if (resultado <= 29.9) {
+      console.log("Tem excesso de peso")
+    }
+    else if (resultado < 35) {
+      console.log("Possui Obesidade")
+    }
+    else {
+      console.log("Obesidade Extrema")
+    }
   }
 
   return (
@@ -38,14 +55,13 @@ export default function App() {
       />
 
       {/* VAI TRANSFORMAR MEU MODAL TRUE, ele aparece */}
-      <Button title="Ver resultado" onPress={() => setModalVisible(!modalVisible)} />
+      <Button title="Ver resultado" onPress={calcIMC} />
 
       {/* POP-UP QUE VAI APARECER O RESULTADO DO IMC DA PESSOA */}
       <Modal transparent={true} visible={modalVisible} animationType='slide'>
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
 
-            <Text> PI PO </Text>
 
             {/* VAI TRANSFORMAR MEU MODAL FALSE, por ele já estar aberto ele usa essa função para fechar */}
             <Button title="Fechar resultado" onPress={() => setModalVisible(!modalVisible)} />
