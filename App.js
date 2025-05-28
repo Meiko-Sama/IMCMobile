@@ -9,6 +9,10 @@ export default function App() {
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
 
+  // Aqui está armazenando a variavel texto que guardara as respostas das mensagens
+  // do IMC
+  const [texto, setTexto] = useState("")
+
   const [modalVisible, setModalVisible] = useState(false);
 
   // CALCULO DO IMC;
@@ -16,21 +20,28 @@ export default function App() {
     let resultado = peso / (altura * altura);
     console.log(resultado)
 
+    // Vendo se a variavel resultado, que contem a conta do IMC, segue os padrões
+    // do IMC.
+
     if (resultado < 18.5) {
-      console.log("Está abaixo do peso")
+      setTexto("Está abaixo do peso");
     }
     else if (resultado <= 24.9) {
-      console.log("Tem peso normal")
+      setTexto("Tem peso normal");
     }
     else if (resultado <= 29.9) {
-      console.log("Tem excesso de peso")
+      setTexto("Tem excesso de peso");
     }
     else if (resultado < 35) {
-      console.log("Possui Obesidade")
+      setTexto("Possui Obesidade");
     }
     else {
-      console.log("Obesidade Extrema")
+      setTexto("Obesidade Extrema");
     }
+
+    // O trecho desse codigo que estava no botão serve para estar aqui para abrir
+    // o modal dentro do IF utilizando a variavel setTexto.
+    setModalVisible(!modalVisible)
   }
 
   return (
@@ -54,7 +65,9 @@ export default function App() {
         style={{ width: "80%", borderBottomWidth: 1, borderColor: "black", bottom: 20 }}
       />
 
-      {/* VAI TRANSFORMAR MEU MODAL TRUE, ele aparece */}
+      {/* VAI TRANSFORMAR MEU MODAL TRUE, ele aparece na tela e calcula
+      o IMC na hora que clicam nele */}
+
       <Button title="Ver resultado" onPress={calcIMC} />
 
       {/* POP-UP QUE VAI APARECER O RESULTADO DO IMC DA PESSOA */}
@@ -62,6 +75,8 @@ export default function App() {
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
 
+            {/* Ele imprime a mensagem que foi feita nos IF, se encaixando no calculo IMC */}
+            <Text style={{ color: "black", fontSize: 15 }}> {texto} </Text>
 
             {/* VAI TRANSFORMAR MEU MODAL FALSE, por ele já estar aberto ele usa essa função para fechar */}
             <Button title="Fechar resultado" onPress={() => setModalVisible(!modalVisible)} />
@@ -73,6 +88,7 @@ export default function App() {
   );
 }
 
+// ESTILIZAÇÃO DOS ELEMENTOS PRESENTES
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -84,14 +100,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(71, 98, 112, 0.6)"
+    backgroundColor: "rgba(71, 98, 112, 0.6)",
+    borderRadius: 20,
   },
   modalContainer: {
     width: 300,
     padding: 20,
-    backgroundColor: "red",
-    borderRadius: 20,
-    alignItems: "center"
+    backgroundColor: "#028ae2",
+    alignItems: "center",
   }
 
 });
